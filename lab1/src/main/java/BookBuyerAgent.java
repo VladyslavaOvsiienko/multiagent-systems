@@ -2,6 +2,7 @@ import jade.core.Agent;
 import jade.core.AID;
 import jade.core.behaviours.TickerBehaviour;
 
+
 public class BookBuyerAgent extends Agent{
     // title of the book to buy
     private String targetBookTitle;
@@ -35,5 +36,7 @@ public class BookBuyerAgent extends Agent{
     protected void takeDown() {
      System.out.println("Buyer-agent "+getAID().getName()+" terminating.");
      }
+
+
 }
 
