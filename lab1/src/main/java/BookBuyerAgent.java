@@ -2,6 +2,10 @@ import jade.core.Agent;
 import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.TickerBehaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
@@ -10,24 +14,39 @@ public class BookBuyerAgent extends Agent{
     // title of the book to buy
     private String targetBookTitle;
     // list of known seller agents
-    private AID[] sellerAgents = {new AID("seller1", AID.ISLOCALNAME),
-            new AID("seller2", AID.ISLOCALNAME)};
+    private AID[] sellerAgents;
 
     // Put agent initializations
      protected void setup() {
-    // Printout a welcome message
-         System.out.println("Hello! Buyer-agent "+getAID().getName()+" is ready.");
-    // Get title of  book to buy
-         Object[] args = getArguments();
+        // Printout a welcome message
+        System.out.println("Hello! Buyer-agent "+getAID().getName()+" is ready.");
+        // Get title of  book to buy
+        Object[] args = getArguments();
         if (args != null && args.length > 0) {
           targetBookTitle = (String) args[0];
           System.out.println("Trying to buy "+targetBookTitle);
             // Add a TickerBehaviour for requesting to seller agents every minute
             addBehaviour(new TickerBehaviour(this, 60000) {
                 protected void onTick() {
-                    myAgent.addBehaviour(new RequestPerformer());
+                    // Update the list of seller agents
+                    DFAgentDescription template = new DFAgentDescription();
+                    ServiceDescription sd = new ServiceDescription();
+                    sd.setType("book-selling");
+                    template.addServices(sd);
+                    try {
+                        DFAgentDescription[] result = DFService.search(myAgent, template);
+                        sellerAgents = new AID[result.length];
+                        for (int i = 0; i < result.length; ++i) {
+                            sellerAgents[i] = result[i].getName();
+                        }
                 }
-            } );
+            catch (FIPAException fe) {
+                fe.printStackTrace();
+            }
+        // Perform the request
+          myAgent.addBehaviour(new RequestPerformer());
+          }
+         } );
         }
           else {
          // terminate
