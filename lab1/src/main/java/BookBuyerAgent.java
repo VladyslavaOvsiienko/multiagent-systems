@@ -79,8 +79,7 @@ public class BookBuyerAgent extends Agent{
                      }
                      cfp.setContent(targetBookTitle);
                      cfp.setConversationId("book-trade");
-                     cfp.setReplyWith("cfp"+System.currentTimeMillis());
-                     // Unique value
+                     cfp.setReplyWith("cfp"+System.currentTimeMillis());// Unique
                      myAgent.send(cfp);
                      // template to get proposals
                      mt = MessageTemplate.and(MessageTemplate.MatchConversationId("book-trade"),
