@@ -17,7 +17,6 @@ public class NavigatorAgent extends Agent {
     String nickname = "NavigatorAgent";
     AID id = new AID(nickname, AID.ISLOCALNAME);
     private Hashtable<AID, WumpusCoordinates> agents_coords;
-    private Hashtable<AID, LinkedList<int[]>> agentsWayStory;
 
     private boolean moveRoom = false;
     private int agentX;
@@ -45,6 +44,7 @@ public class NavigatorAgent extends Agent {
     public static int STATE_TRUE = 1;
     public static int STATE_FALSE = 2;
     public static int STATE_POSSIBLE = 3;
+    private Hashtable<AID, LinkedList<int[]>> agentsWayStory;
 
     public static java.util.HashMap<String, String> perceptionCodes = new java.util.HashMap<String, String>() {{
         put(BREEZE, "breeze");
@@ -288,7 +288,7 @@ public class NavigatorAgent extends Agent {
         WumpusCoordinates upNeighbor = new WumpusCoordinates(request_agent_position.getX(), request_agent_position.getY() + 1);
         WumpusCoordinates leftNeighbor = new WumpusCoordinates(request_agent_position.getX() - 1, request_agent_position.getY());
         WumpusCoordinates bottomNeighbor = new WumpusCoordinates(request_agent_position.getX(), request_agent_position.getY() - 1);
-        ;
+
         return new WumpusCoordinates[]{rightNeighbor, upNeighbor, leftNeighbor, bottomNeighbor};
     }
 

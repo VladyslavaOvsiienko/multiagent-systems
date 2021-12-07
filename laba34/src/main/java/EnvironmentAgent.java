@@ -76,18 +76,18 @@ public class EnvironmentAgent extends Agent {
     private void createCave() {
         this.Cave = new Room[4][4];
         this.Cave[0][0] = new Room();
-        this.Cave[0][1] = new Room(BREEZE);
-        this.Cave[0][2] = new Room(HOLE);
-        this.Cave[0][3] = new Room(BREEZE);
+        this.Cave[0][1] = new Room();
+        this.Cave[0][2] = new Room();
+        this.Cave[0][3] = new Room(STENCH);
         this.Cave[1][0] = new Room(STENCH);
-        this.Cave[1][3] = new Room(BREEZE);
-        this.Cave[2][0] = new Room(WUMPUS, STENCH);
-        this.Cave[2][1] = new Room(STENCH, GOLD);
-        this.Cave[2][2] = new Room();
-        this.Cave[2][3] = new Room(BREEZE);
-        this.Cave[3][0] = new Room(STENCH);
-        this.Cave[3][2] = new Room(BREEZE);
-        this.Cave[3][3] = new Room(HOLE);
+        this.Cave[1][3] = new Room();
+        this.Cave[2][0] = new Room(STENCH);
+        this.Cave[2][1] = new Room(STENCH);
+        this.Cave[2][2] = new Room(STENCH);
+        this.Cave[2][3] = new Room(WUMPUS);
+        this.Cave[3][0] = new Room(WUMPUS);
+        this.Cave[3][2] = new Room(WUMPUS);
+        this.Cave[3][3] = new Room(WUMPUS);
         for (int i = 0; i < this.Cave.length; i++){
             for (int j = 0; j < this.Cave[i].length; j++){
                 if (this.Cave[i][j] == null) {
