@@ -38,6 +38,7 @@ public class SpeleologistAgent extends Agent {
         put(MOVE, "move");
         put(SHOOT_ARROW, "shoot");
         put(GOLD_IS_FOUND, "take");
+        put(CLIMB, "climb");
     }};
 
 
